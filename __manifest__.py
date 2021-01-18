@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Custom Project",
+    'name': "Custom Outsourcing",
     'author': "Mohammad abusubhia",
     'version': '1.1',
     'depends': ['base','crm','project','hr_timesheet'],
