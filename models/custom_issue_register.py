@@ -1,11 +1,11 @@
 from odoo import models,fields,api
 from odoo import tools, _
 class Custom_Issue_Register(models.Model):
-    _name = "project.project.issue.register"
+    _name = "outsourcing.outsourcing.issue.register"
     issueID = fields.Char(string="Issue ID",required=True,cope=False,readonly=True,index=True,default=lambda self: _("New"))
     name = fields.Char(string="Issue")
     owner = fields.Many2one('res.users')
-    project_id = fields.Many2one('project.project',default=lambda self: self.env.context.get('active_id', []))
+    project_id = fields.Many2one('outsourcing.outsourcing',default=lambda self: self.env.context.get('active_id', []))
     due_date = fields.Date()
     status = fields.Selection(
         [
@@ -22,7 +22,7 @@ class Custom_Issue_Register(models.Model):
     @api.model
     def create(self,vals):
         if vals.get('issueID',_("New") == _("New")):
-            seq = self.env['ir.sequence'].next_by_code('project.project.issue.register.sequence')
+            seq = self.env['ir.sequence'].next_by_code('outsourcing.outsourcing.issue.register.sequence')
             name_seq = 'ISSUE/'+seq
             vals['issueID'] = name_seq
         res = super(Custom_Issue_Register,self).create(vals)

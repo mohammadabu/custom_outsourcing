@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data noupdate="1">
-        <record id="seq_custom_project" model="ir.sequence">
-            <field name="name">Project Sequence</field>
-            <field name="code">project.project.sequence</field>
+        <record id="seq_custom_outsourcing" model="ir.sequence">
+            <field name="name">outsourcing Sequence</field>
+            <field name="code">outsourcing.outsourcing.sequence</field>
             <field name="prefix">%(range_year)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
-        <record id="seq_custom_project_change_log" model="ir.sequence">
+        <record id="seq_custom_outsourcing_change_log" model="ir.sequence">
             <field name="name">Change Log Sequence</field>
-            <field name="code">project.project.change.log.sequence</field>
+            <field name="code">outsourcing.outsourcing.change.log.sequence</field>
             <field name="prefix">%(range_year)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
-        <record id="seq_custom_project_risk" model="ir.sequence">
+        <record id="seq_custom_outsourcing_risk" model="ir.sequence">
             <field name="name">Risk Sequence</field>
-            <field name="code">project.project.risk.sequence</field>
+            <field name="code">outsourcing.outsourcing.risk.sequence</field>
             <field name="prefix">%(range_year)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
-        <record id="seq_custom_issue_register" model="ir.sequence">
+        <record id="seq_custom_issue_register_outsourcing" model="ir.sequence">
             <field name="name">Issue Register Sequence</field>
-            <field name="code">project.project.issue.register.sequence</field>
+            <field name="code">outsourcing.outsourcing.issue.register.sequence</field>
             <field name="prefix">%(range_year)s/</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>

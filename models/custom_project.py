@@ -2,13 +2,13 @@ from odoo import models,fields,api,exceptions,SUPERUSER_ID
 from odoo import tools, _
 from datetime import datetime,timedelta
 
-class CustomProject(models.Model):
-    _inherit = 'project.project'
+class CustomOutsourcing(models.Model):
+    _inherit = 'outsourcing.outsourcing'
     @api.model
     def _default_stage_project(self):
-        project_stage_default = self.env['project.project.stages'].sudo().search([('default_stage','=',"True")])
+        project_stage_default = self.env['outsourcing.outsourcing.stages'].sudo().search([('default_stage','=',"True")])
         return project_stage_default
-    project_stage = fields.Many2one('project.project.stages', string='Stage', ondelete='restrict', index=True, copy=False, tracking=True,group_expand='_read_group_stage_ids',default=_default_stage_project)
+    project_stage = fields.Many2one('outsourcing.outsourcing.stages', string='Stage', ondelete='restrict', index=True, copy=False, tracking=True,group_expand='_read_group_stage_ids',default=_default_stage_project)
     name_seq = fields.Char(string="Project Ref",required=True,cope=False,readonly=True,index=True,default=lambda self: _("New"))
     parent_opportunity = fields.Many2one('crm.lead')
     auto_create = fields.Selection([
@@ -19,9 +19,9 @@ class CustomProject(models.Model):
     #     action_id = self.env.ref('project.project.action_id').id
     #     return action_id
     # get_action = fields.Char(default=getAction)
-    change_log = fields.One2many('project.project.change.log', 'project_id', string="Change log")
-    issue_register = fields.One2many('project.project.issue.register', 'project_id', string="Issue Register")
-    risk_register = fields.One2many('project.project.risk', 'project_id', string="Risk Register")
+    change_log = fields.One2many('outsourcing.outsourcing.change.log', 'project_id', string="Change log")
+    issue_register = fields.One2many('outsourcing.outsourcing.issue.register', 'project_id', string="Issue Register")
+    risk_register = fields.One2many('outsourcing.outsourcing.risk', 'project_id', string="Risk Register")
     account_manager = fields.Many2one('res.users')
     project_folder = fields.Char()
     assigned_resources = fields.Many2many('res.users','assigned_resources')
@@ -47,18 +47,18 @@ class CustomProject(models.Model):
     @api.model
     def getAllRelatedProject(self):
         if self.parent_opportunity.id != False:
-            projects = self.env['project.project'].sudo().search(['&','|',('default_access_emails','like','#'+str(self.env.uid)+'#'),'|',('stage_access_emails','like','#'+str(self.env.uid)+'#'),'|',('assigned_resources_access_emails','like','#'+str(self.env.uid)+'#'),('owner_ownerManager_emails','like','#'+str(self.env.uid)+'#'),('parent_opportunity','=',self.parent_opportunity.id),('id','!=',self.id)])
+            projects = self.env['outsourcing.outsourcing'].sudo().search(['&','|',('default_access_emails','like','#'+str(self.env.uid)+'#'),'|',('stage_access_emails','like','#'+str(self.env.uid)+'#'),'|',('assigned_resources_access_emails','like','#'+str(self.env.uid)+'#'),('owner_ownerManager_emails','like','#'+str(self.env.uid)+'#'),('parent_opportunity','=',self.parent_opportunity.id),('id','!=',self.id)])
             # ('parent_opportunity','=',self.parent_opportunity.id),('id','!=',self.id)
             # projects = self.env['project.project'].sudo().search(['|','|',('default_access_emails','like','#'+str(self.env.uid)+'#'),('stage_access_emails','like','#'+str(self.env.uid)+'#'),'|',('assigned_resources_access_emails','like','#'+str(self.env.uid)+'#'),('owner_ownerManager_emails','like','#'+str(self.env.uid)+'#')])
             self.related_project = projects
         else:
              self.related_project = []   
-    related_project = fields.Many2many('project.project','related_project','name_seq',compute='getAllRelatedProject')
+    related_project = fields.Many2many('outsourcing.outsourcing','related_project','name_seq',compute='getAllRelatedProject')
     @api.model 
     def calc_new_project_completed(self,id):
         project_id = id
-        all_tasks  = self.env['project.task'].sudo().search([('project_id','=',project_id)])
-        project  = self.env['project.project'].sudo().search([('id','=',project_id)])
+        all_tasks  = self.env['outsourcing.outsourcing'].sudo().search([('project_id','=',project_id)])
+        project  = self.env['outsourcing.outsourcing'].sudo().search([('id','=',project_id)])
         # work = 0
         # work_complete = 0
         total_percentage = 0
@@ -89,19 +89,19 @@ class CustomProject(models.Model):
     #     for related_project in all_projects:
     #         related_project_arr.append(related_project.id)
     #     return [('id', 'not in', related_project_arr)]
-    linked_project = fields.Many2many('project.project','related_project','name_seq')
+    linked_project = fields.Many2many('outsourcing.outsourcing','related_project','name_seq')
     def get_resk_count(self):
-        count_value = self.env['project.project.risk'].search_count([('project_id','=',self.id)])
+        count_value = self.env['outsourcing.outsourcing.risk'].search_count([('project_id','=',self.id)])
         self.risk_project_account = count_value
     risk_project_account = fields.Integer(string="risk count",compute="get_resk_count")
 
     def get_issue_register_count(self):
-        count_value = self.env['project.project.issue.register'].search_count([('project_id','=',self.id)])
+        count_value = self.env['outsourcing.outsourcing.issue.register'].search_count([('project_id','=',self.id)])
         self.issue_register_account = count_value
     issue_register_account = fields.Integer(string="issue_register count",compute="get_issue_register_count")
 
     def get_change_log_count(self):
-        count_value = self.env['project.project.change.log'].search_count([('project_id','=',self.id)])
+        count_value = self.env['outsourcing.outsourcing.change.log'].search_count([('project_id','=',self.id)])
         self.change_log_account = count_value
     change_log_account = fields.Integer(string="change_log count",compute="get_change_log_count")
     
@@ -115,7 +115,7 @@ class CustomProject(models.Model):
             'name':"Project Risk",
             'domain':[('project_id','=',self.id)],
             'type':'form',
-            'res_model':'project.project.risk',
+            'res_model':'outsourcing.outsourcing.risk',
             'view_id':False,
             'view_mode':'tree,form',
             'type':'ir.actions.act_window',
@@ -127,7 +127,7 @@ class CustomProject(models.Model):
             'name':"Issue Register",
             'domain':[('project_id','=',self.id)],
             'type':'form',
-            'res_model':'project.project.issue.register',
+            'res_model':'outsourcing.outsourcing.issue.register',
             'view_id':False,
             'view_mode':'tree,form',
             'type':'ir.actions.act_window',
@@ -139,7 +139,7 @@ class CustomProject(models.Model):
             'name':"Change Log",
             'domain':[('project_id','=',self.id)],
             'type':'form',
-            'res_model':'project.project.change.log',
+            'res_model':'outsourcing.outsourcing.change.log',
             'view_id':False,
             'view_mode':'tree,form',
             'type':'ir.actions.act_window',
@@ -170,7 +170,7 @@ class CustomProject(models.Model):
     @api.model 
     def custom_default_group(self,wh="all"):
         all_emails_default_access = False
-        all_stages = self.env['project.project.stages'].sudo().search([])
+        all_stages = self.env['outsourcing.outsourcing.stages'].sudo().search([])
         if wh == "all":
             #get default position
             all_default_position = self.env['hr.job'].sudo().search([('default_groub_project','=',True)])
@@ -201,7 +201,7 @@ class CustomProject(models.Model):
                                         all_emails_default_stage =  all_emails_default_stage+"#"+str(employee_stage.user_id.id)+"#"
                                 else:
                                     all_emails_default_stage = "#"+str(employee_stage.user_id.id)+"#"
-            all_projects = self.env['project.project'].sudo().search([('project_stage','=',stage.id)])
+            all_projects = self.env['outsourcing.outsourcing'].sudo().search([('project_stage','=',stage.id)])
             for project in all_projects:
                 all_emails_owner_ownerManager_emails = False
                 all_emails_assigned_resources = False
@@ -289,30 +289,30 @@ class CustomProject(models.Model):
         all_emails = False
         # get owner
         if stage == "Account Manager Review" or stage == "PMO Review" or stage == "Internal Kickoff Meeting" or stage == "On Hold" or stage == "Closed":
-            all_emails = self.pool.get("project.project").getUserEmailById(self,rec.account_manager.id,all_emails)
+            all_emails = self.pool.get("outsourcing.outsourcing").getUserEmailById(self,rec.account_manager.id,all_emails)
         # get Assigned Project Manager
-        all_emails = self.pool.get("project.project").getUserEmailById(self,rec.user_id.id,all_emails)         
+        all_emails = self.pool.get("outsourcing.outsourcing").getUserEmailById(self,rec.user_id.id,all_emails)         
         #get pmo manager
         if stage == "PMO Review" or stage == "On Hold" or stage == "Closed":
-            all_emails = self.pool.get("project.project").get_all_employee_position(self,"PMO Manager",all_emails)
+            all_emails = self.pool.get("outsourcing.outsourcing").get_all_employee_position(self,"PMO Manager",all_emails)
         #get Technical Manager
         if stage == "Resources Assignment" or stage == "Internal Kickoff Meeting":
-            all_emails = self.pool.get("project.project").get_all_employee_position(self,"Technical Manager",all_emails)
+            all_emails = self.pool.get("outsourcing.outsourcing").get_all_employee_position(self,"Technical Manager",all_emails)
         return all_emails            
     @api.model
     def create(self,vals):
         if vals.get('name_seq',_("New") == _("New")):
-            seq = self.env['ir.sequence'].next_by_code('project.project.sequence')
+            seq = self.env['ir.sequence'].next_by_code('outsourcing.outsourcing.sequence')
             name_seq = 'PRJ/'+seq
             vals['name_seq'] = name_seq
-        res = super(CustomProject,self).create(vals)
+        res = super(CustomOutsourcing,self).create(vals)
         return res
     def write(self,values):
         before_edit_pm = self.user_id.id
         before_edit_am = self.account_manager.id
         befory_edit_assigned_resources = self.assigned_resources
         befory_edit_stage = self.project_stage.internal_id
-        rtn = super(CustomProject,self).write(values)
+        rtn = super(CustomOutsourcing,self).write(values)
         after_edit_pm = self.user_id.id
         after_edit_am = self.account_manager.id
         after_edit_assigned_resources = self.assigned_resources
@@ -325,27 +325,27 @@ class CustomProject(models.Model):
             if not result:
                 can_edit = True    
         if(before_edit_pm != after_edit_pm or before_edit_am != after_edit_am or can_edit == True or befory_edit_stage != after_edit_stage):
-            self.pool.get("project.project").custom_default_group(self,'project')
+            self.pool.get("outsourcing.outsourcing").custom_default_group(self,'project')
         if(befory_edit_stage != after_edit_stage):
-            all_emails_moved = self.pool.get("project.project").custom_move_stage_notify(self,self)
+            all_emails_moved = self.pool.get("outsourcing.outsourcing").custom_move_stage_notify(self,self)
             self.when_moved_project_emails = all_emails_moved
-            template_id = self.env.ref('custom_project.custom_update_project_email_tempalte').id
+            template_id = self.env.ref('custom_outsourcing.custom_update_project_email_tempalte').id
             self.env['mail.template'].browse(template_id).send_mail(self.id,force_send=True)        
         return rtn
     def unlink(self):
-        rtn = super(CustomProject, self).unlink()
-        self.pool.get("project.project").custom_default_group(self,"project")
+        rtn = super(CustomOutsourcing, self).unlink()
+        self.pool.get("outsourcing.outsourcing").custom_default_group(self,"project")
         return rtn    
     @api.model
     def escalation_project(self):
         job_positions = self.env['hr.job'].search([('default_esc_project','=',True)])
-        projects = self.env['project.project'].search([])
+        projects = self.env['outsourcing.outsourcing'].search([])
         for project in projects:
             if project.project_esc_send_email != True:
                 date_now = datetime.today()
                 project_stage = project.project_stage.internal_id
                 arrivalـtime = project.project_esc_date
-                stage_info = self.env['project.project.stages'].search([('internal_id','=',project_stage)])
+                stage_info = self.env['outsourcing.outsourcing.stages'].search([('internal_id','=',project_stage)])
                 escalation_after = False
                 if project.is_repeted != False:
                     escalation_after = stage_info.repet_escalation
@@ -445,7 +445,7 @@ class CustomProject(models.Model):
                             project.project_esc_send_email = True  
             else:
                 project_stage = project.project_stage.internal_id
-                stage_info = self.env['project.project.stages'].search([('internal_id','=',project_stage)])
+                stage_info = self.env['outsourcing.outsourcing.stages'].search([('internal_id','=',project_stage)])
                 if stage_info.repet_escalation != False and stage_info.repet_escalation > 0 :
                     project.project_esc_send_email = False
                     project.is_repeted = True 

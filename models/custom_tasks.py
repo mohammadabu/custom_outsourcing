@@ -1,13 +1,13 @@
 from odoo import models,fields,api,exceptions,SUPERUSER_ID
 from odoo import tools, _
 class CustomTasks(models.Model):
-    _inherit = 'project.task'
+    _inherit = 'outsourcing.task'
     @api.model
     def _getUserTask(self):
         assigned_arr = []
         active_ids = self.env.context.get('active_ids', [])
         for active_id in active_ids: 
-            project = self.env['project.project'].sudo().search([('id','=',active_id)])
+            project = self.env['outsourcing.outsourcing'].sudo().search([('id','=',active_id)])
             for assigned in project.assigned_resources:
                 assigned_arr.append(assigned.id)     
         return [('id', 'in', assigned_arr)]
@@ -39,12 +39,12 @@ class CustomTasks(models.Model):
         rtn = super(CustomTasks,self).write(values)
         active_ids = self.env.context.get('active_ids', [])
         for active_id in active_ids: 
-            self.pool.get("project.project").calc_new_project_completed(self,active_id) 
+            self.pool.get("outsourcing.outsourcing").calc_new_project_completed(self,active_id) 
         return rtn
 
     def unlink(self):
         rtn = super(CustomTasks, self).unlink()
         active_ids = self.env.context.get('active_ids', [])
         for active_id in active_ids: 
-            self.pool.get("project.project").calc_new_project_completed(self,active_id) 
+            self.pool.get("outsourcing.outsourcing").calc_new_project_completed(self,active_id) 
         return rtn     

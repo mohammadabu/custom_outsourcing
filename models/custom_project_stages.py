@@ -1,6 +1,6 @@
 from odoo import models,fields,api
-class Custom_Project_Stages(models.Model):
-    _name = "project.project.stages"
+class Custom_Outsourcing_Stages(models.Model):
+    _name = "outsourcing.outsourcing.stages"
     name = fields.Char(string='Name')
     default_stage = fields.Boolean()
     internal_id = fields.Char()
@@ -18,7 +18,7 @@ class Custom_Project_Stages(models.Model):
     repet_escalation = fields.Integer(string='Repet escalation after (Business Days)')
     def write(self,values):
         befory_edit_access_group = self.access_group
-        rtn = super(Custom_Project_Stages,self).write(values)
+        rtn = super(Custom_Outsourcing_Stages,self).write(values)
         after_edit_access_group = self.access_group
         can_edit = False
         if len(befory_edit_access_group) != len(after_edit_access_group):
@@ -28,7 +28,7 @@ class Custom_Project_Stages(models.Model):
             if not result:
                 can_edit = True    
         if(can_edit == True):
-            self.pool.get("project.project").custom_default_group(self,"stage")
+            self.pool.get("outsourcing.outsourcing").custom_default_group(self,"stage")
         return rtn
 
     # def create(self,vals):

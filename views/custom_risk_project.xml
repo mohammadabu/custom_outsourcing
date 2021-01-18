@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="project_risk_action" model="ir.actions.act_window">
-            <field name="name">Project Risks</field>
-            <field name="res_model">project.project.risk</field>
+        <record id="outsourcing_risk_action" model="ir.actions.act_window">
+            <field name="name">outsourcing Risks</field>
+            <field name="res_model">outsourcing.outsourcing.risk</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
-                Define a new on Project Risks
+                Define a new on Outsourcing Risks
               </p>
             </field>
         </record>
-        <record id='custom_project_risk_action_form' model='ir.ui.view'>
-            <field name='name'>custom project Risk action form</field>
-            <field name='model'>project.project.risk</field>
+        <record id='custom_outsourcing_risk_action_form' model='ir.ui.view'>
+            <field name='name'>custom outsourcing Risk action form</field>
+            <field name='model'>outsourcing.outsourcing.risk</field>
             <field name='arch' type='xml'>
                 <form>
                     <sheet>
@@ -37,9 +37,9 @@
                 </form>            
             </field>
         </record>
-        <record id='custom_project_risk_action_tree' model='ir.ui.view'>
-            <field name='name'>custom project Risk action tree</field>
-            <field name='model'>project.project.risk</field>
+        <record id='custom_outsourcing_risk_action_tree' model='ir.ui.view'>
+            <field name='name'>custom outsourcing Risk action tree</field>
+            <field name='model'>outsourcing.outsourcing.risk</field>
             <field name='arch' type='xml'>
                 <tree string="Risk" decoration-success="status=='Resolved'" decoration-danger="status=='Not resolved'" >
                     <field name='issueID'/>
@@ -54,11 +54,11 @@
             </field>
         </record>  
         <menuitem
-                id="custom_menu_project_risk"
-                action="project_risk_action"
-                parent="project.menu_project_config"
+                id="custom_menu_outsourcing_risk"
+                action="outsourcing_risk_action"
+                parent="outsourcing.menu_outsourcing_config"
                 sequence="11"
-                name="Project Risks"
+                name="Outsourcing Risks"
         />
     </data>
 </odoo>    

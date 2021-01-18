@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="project_stages_reason_action" model="ir.actions.act_window">
-            <field name="name">Project Stages</field>
-            <field name="res_model">project.project.stages</field>
+        <record id="outsourcing_stages_reason_action" model="ir.actions.act_window">
+            <field name="name">outsourcing Stages</field>
+            <field name="res_model">outsourcing.outsourcing.stages</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
-                Define a new on Project Stages
+                Define a new on Outsourcing Stages
               </p>
             </field>
         </record>
-        <record id='custom_project_stages_reason_action' model='ir.ui.view'>
-            <field name='name'>custom project stages action</field>
-            <field name='model'>project.project.stages</field>
+        <record id='custom_outsourcing_stages_reason_action' model='ir.ui.view'>
+            <field name='name'>custom outsourcing stages action</field>
+            <field name='model'>outsourcing.outsourcing.stages</field>
             <field name='arch' type='xml'>
                 <form>
                     <sheet>
@@ -31,19 +31,19 @@
             </field>
         </record>  
         <menuitem
-                id="custom_menu_project_stages"
-                action="project_stages_reason_action"
-                parent="project.menu_project_config"
+                id="custom_menu_outsourcing_stages"
+                action="outsourcing_stages_reason_action"
+                parent="outsourcing.menu_outsourcing_config"
                 sequence="10"
-                name="Project Stages"
+                name="Outsourcing Stages"
         />
-        <record id="custom_project_kanban_view" model="ir.ui.view">
-            <field name="name">Custom Project Kanban</field>
-            <field name="model">project.project</field>
-            <field name="inherit_id" ref="project.view_project_kanban"/>
+        <record id="custom_outsourcing_kanban_view" model="ir.ui.view">
+            <field name="name">Custom outsourcing Kanban</field>
+            <field name="model">outsourcing.outsourcing</field>
+            <field name="inherit_id" ref="outsourcing.view_outsourcing_kanban"/>
             <field name="arch" type="xml">
                 <kanban position="attributes">
-                    <attribute name="class">o_kanban_small_column o_kanban_project_tasks</attribute>
+                    <attribute name="class">o_kanban_small_column o_kanban_outsourcing_tasks</attribute>
                 </kanban>
                 <kanban position="attributes">
                     <attribute name="default_group_by">project_stage</attribute>
@@ -67,7 +67,7 @@
                 </xpath>
                 <xpath expr="//kanban/templates/t/div" position="replace"  >
                     <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
-                        <div class="o_project_kanban_main">
+                        <div class="o_outsourcing_kanban_main">
                             <div class="o_dropdown_kanban dropdown" style="visibility: visible;" groups="base.group_user">
                                 <a class="dropdown-toggle o-no-caret btn" data-toggle="dropdown" role="button" aria-label="Dropdown menu" title="Dropdown menu" aria-expanded="true" data-display="static" href="#" >
                                     <span class="fa fa-ellipsis-v"/>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <field name="id" invisible="1"/>
-                            <a style='color: #666666;' t-attf-href="/web?&amp;debug=#id={{ record.id.value }}&amp;view_type=form&amp;model=project.project&amp;action=380&amp;active_id={{ record.id.value }}&amp;menu_id=252">
+                            <a style='color: #666666;' t-attf-href="/web?&amp;debug=#id={{ record.id.value }}&amp;view_type=form&amp;model=outsourcing.outsourcing&amp;action=380&amp;active_id={{ record.id.value }}&amp;menu_id=252">
                             <div class="oe_kanban_content row">
                                 <div class='col-md-1'>
                                     <span class="o_right"><field name="is_favorite" widget="boolean_favorite" nolabel="1" force_save="1"/></span>
@@ -99,7 +99,7 @@
                                     <div class='row'>
                                         <li style="list-style-type: none;width: 72%;margin-top: 10px;">
                                             <div>Progress</div>
-                                            <field string="Project Complete" name="new_project_completed" widget="progressbar"
+                                            <field string="Outsourcing Complete" name="new_project_completed" widget="progressbar"
                                                 options="{'max_field': 'max_rate',  'style': 'width:160px; height: 100px;'}">
                                             </field>
                                         </li>
@@ -108,13 +108,13 @@
                                 <div class="oe_clear"></div>
                             </div>
                             </a>
-                            <div class="o_project_kanban_boxes" style="padding-left: 11px;padding-top: 22px;width: 96%;font-weight: 500;display: flex;">
+                            <div class="o_outsourcing_kanban_boxes" style="padding-left: 11px;padding-top: 22px;width: 96%;font-weight: 500;display: flex;">
                                 <field name="id" invisible="1"/>
-                                <a style='width: 60%;' t-attf-href="/web?&amp;debug=#view_type=kanban&amp;model=project.task&amp;action=376&amp;active_id={{ record.id.value }}&amp;menu_id=252">
+                                <a style='width: 60%;' t-attf-href="/web?&amp;debug=#view_type=kanban&amp;model=outsourcing.task&amp;action=376&amp;active_id={{ record.id.value }}&amp;menu_id=252">
                                     <span class="o_value"><t t-esc="record.task_count.value"/></span>
                                     <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
                                 </a>
-                                <a t-if="record.analytic_account_id.raw_value" class="o_project_kanban_box o_project_timesheet_box" name="action_view_account_analytic_line" type="object" groups="analytic.group_analytic_accounting">
+                                <a t-if="record.analytic_account_id.raw_value" class="o_outsourcing_kanban_box o_outsourcing_timesheet_box" name="action_view_account_analytic_line" type="object" groups="analytic.group_analytic_accounting">
                                     <div>
                                         <span class="o_label">Profitability</span>
                                     </div>
@@ -125,10 +125,10 @@
                 </xpath>
             </field>    
         </record>
-        <record id="custom_edit_project_view" model="ir.ui.view">
-            <field name="name">Custom Edit Project</field>
-            <field name="model">project.project</field>
-            <field name="inherit_id" ref="project.edit_project"/>
+        <record id="custom_edit_outsourcing_view" model="ir.ui.view">
+            <field name="name">Custom Edit outsourcing</field>
+            <field name="model">outsourcing.outsourcing</field>
+            <field name="inherit_id" ref="outsourcing.edit_outsourcing"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
                     <field name="project_stage" widget="statusbar" options="{'clickable': '1'}"/>
@@ -140,8 +140,8 @@
                     <button name="open_issue_register" type="object" class="oe_start_button" icon="fa-exclamation">
                         <field name="issue_register_account" string="Issue Register" widget="statinfo"/>
                     </button>
-                    <button name="open_project_risk" type="object" class="oe_start_button" icon="fa-exclamation-triangle">
-                        <field name="risk_project_account" string="Risk Register" widget="statinfo"/>
+                    <button name="open_outsourcing_risk" type="object" class="oe_start_button" icon="fa-exclamation-triangle">
+                        <field name="risk_outsourcing_account" string="Risk Register" widget="statinfo"/>
                     </button>
                     <button name="open_change_log" type="object" class="oe_start_button" icon="fa-refresh">
                         <field name="change_log_account" string="Change Log" widget="statinfo"/>
@@ -198,10 +198,10 @@
                 </xpath>
             </field>
         </record>   
-        <record id="custom_edit_project_view_modal" model="ir.ui.view">
-            <field name="name">Custom Edit Project Modal</field>
-            <field name="model">project.project</field>
-            <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+        <record id="custom_edit_outsourcing_view_modal" model="ir.ui.view">
+            <field name="name">Custom Edit outsourcing Modal</field>
+            <field name="model">outsourcing.outsourcing</field>
+            <field name="inherit_id" ref="outsourcing.outsourcing_outsourcing_view_form_simplified"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='alias_def']" position="after">
                     <field name="company_id" invisible="1"/>
