@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <field name="id" invisible="1"/>
-                            <a style='color: #666666;' t-attf-href="/web?&amp;debug=#id={{ record.id.value }}&amp;view_type=form&amp;model=outsourcing.outsourcing&amp;action=380&amp;active_id={{ record.id.value }}&amp;menu_id=252">
+                            <a style='color: #666666;' t-attf-href="/web?&amp;debug=#id={{ record.id.value }}&amp;view_type=form&amp;model=outsourcing.outsourcing&amp;action=566&amp;active_id={{ record.id.value }}&amp;menu_id=390">
                             <div class="oe_kanban_content row">
                                 <div class='col-md-1'>
                                     <span class="o_right"><field name="is_favorite" widget="boolean_favorite" nolabel="1" force_save="1"/></span>
@@ -110,7 +110,7 @@
                             </a>
                             <div class="o_outsourcing_kanban_boxes" style="padding-left: 11px;padding-top: 22px;width: 96%;font-weight: 500;display: flex;">
                                 <field name="id" invisible="1"/>
-                                <a style='width: 60%;' t-attf-href="/web?&amp;debug=#view_type=kanban&amp;model=outsourcing.task&amp;action=376&amp;active_id={{ record.id.value }}&amp;menu_id=252">
+                                <a style='width: 60%;' t-attf-href="/web?&amp;debug=#view_type=kanban&amp;model=outsourcing.task&amp;action=562&amp;active_id={{ record.id.value }}&amp;menu_id=390">
                                     <span class="o_value"><t t-esc="record.task_count.value"/></span>
                                     <span class="o_label"><t t-esc="record.label_tasks.value"/></span>
                                 </a>
