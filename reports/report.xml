@@ -4,8 +4,8 @@
     <report id="internal_report_outsourcing_detail"
             model="outsourcing.outsourcing"
             report_type="qweb-pdf"
-            name="custom_project.internal_outsourcing_detail_qweb_report"
-            file="custom_project.internal_outsourcing_detail_qweb_report"
+            name="custom_outsourcing.internal_outsourcing_detail_qweb_report"
+            file="custom_outsourcing.internal_outsourcing_detail_qweb_report"
             string="Internal Outsourcing Details"/>
 
 </odoo>
