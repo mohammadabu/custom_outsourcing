@@ -141,7 +141,7 @@
                         <field name="issue_register_account" string="Issue Register" widget="statinfo"/>
                     </button>
                     <button name="open_outsourcing_risk" type="object" class="oe_start_button" icon="fa-exclamation-triangle">
-                        <field name="risk_outsourcing_account" string="Risk Register" widget="statinfo"/>
+                        <field name="risk_project_account" string="Risk Register" widget="statinfo"/>
                     </button>
                     <button name="open_change_log" type="object" class="oe_start_button" icon="fa-refresh">
                         <field name="change_log_account" string="Change Log" widget="statinfo"/>
