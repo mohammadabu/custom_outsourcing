@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_project_project_stages,access.project.project.stages,model_project_project_stages,,1,1,1,1
-access_project_project_risk,access.project.project.risk,model_project_project_risk,,1,1,1,1
-access_project_project_issue_register,access.project.project.issue.register,model_project_project_issue_register,,1,1,1,1
-access_project_project_change_log,access.project.project.change.log,model_project_project_change_log,,1,1,1,1
+access_outsourcing_outsourcing_stages,access.outsourcing.outsourcing.stages,model_outsourcing_outsourcing_stages,,1,1,1,1
+access_outsourcing_outsourcing_risk,access.outsourcing.outsourcing.risk,model_outsourcing_outsourcing_risk,,1,1,1,1
+access_outsourcing_outsourcing_issue_register,access.outsourcing.outsourcing.issue.register,model_outsourcing_outsourcing_issue_register,,1,1,1,1
+access_outsourcing_outsourcing_change_log,access.outsourcing.outsourcing.change.log,model_outsourcing_outsourcing_change_log,,1,1,1,1
