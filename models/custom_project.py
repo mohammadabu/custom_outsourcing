@@ -57,7 +57,7 @@ class CustomOutsourcing(models.Model):
     @api.model 
     def calc_new_project_completed(self,id):
         project_id = id
-        all_tasks  = self.env['outsourcing.outsourcing'].sudo().search([('outsourcing_id','=',project_id)])
+        all_tasks  = self.env['outsourcing.task'].sudo().search([('outsourcing_id','=',project_id)])
         project  = self.env['outsourcing.outsourcing'].sudo().search([('id','=',project_id)])
         # work = 0
         # work_complete = 0
