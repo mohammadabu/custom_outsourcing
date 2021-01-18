@@ -103,11 +103,11 @@
                                                     <t t-esc="'%02d:%02d' % (int(t.planned_hours), t.planned_hours % 1 * 60)"/></t>
                                                 <t t-if="not t.planned_hours">00:00</t>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <t t-if='t.effective_hours'>
                                                     <t t-esc="'%02d:%02d' % (int(t.effective_hours), t.effective_hours % 1 * 60)"/></t>
                                                 <t t-if="not t.effective_hours">00:00</t>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <t t-if='t.remaining_hours'>
                                                     <t t-esc="'%02d:%02d' % (int(t.remaining_hours), t.remaining_hours % 1 * 60)"/></t>
