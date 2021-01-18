@@ -3,11 +3,11 @@
     'name': "Custom Outsourcing",
     'author': "Mohammad abusubhia",
     'version': '1.1',
-    'depends': ['base','crm','outsourcing','hr_timesheet'],
+    'depends': ['base','crm','outsourcing'],
     'data': [
         'security/ir.model.access.csv',
         # 'security/security.xml',
-        'data/ir_sequence_data.xml',
+        # 'data/ir_sequence_data.xml',
         # 'data/cron.xml',
         # 'data/delete_rules.xml',
         # 'data/data_projects_stages.xml',
