@@ -17,7 +17,7 @@
         'views/custom_issue_register.xml',
         'views/custom_change_log.xml',
         'views/custom_tasks.xml',
-        # 'reports/internal_project_detail_qweb_report.xml',
-        # 'reports/report.xml',
+        'reports/internal_project_detail_qweb_report.xml',
+        'reports/report.xml',
     ],
 }

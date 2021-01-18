@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     
-    <report id="internal_report_project_detail"
-            model="project.project"
+    <report id="internal_report_outsourcing_detail"
+            model="outsourcing.outsourcing"
             report_type="qweb-pdf"
-            name="custom_project.internal_project_detail_qweb_report"
-            file="custom_project.internal_project_detail_qweb_report"
-            string="Internal Project Details"/>
+            name="custom_project.internal_outsourcing_detail_qweb_report"
+            file="custom_project.internal_outsourcing_detail_qweb_report"
+            string="Internal Outsourcing Details"/>
 
 </odoo>

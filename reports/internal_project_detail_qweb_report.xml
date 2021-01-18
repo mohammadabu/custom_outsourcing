@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<template id="internal_project_detail_qweb_report" name="internal_project_detail_qweb_report">
+<template id="internal_outsourcing_detail_qweb_report" name="internal_outsourcing_detail_qweb_report">
     <t t-call="web.html_container">
         <t t-foreach="docs" t-as="e">
             <t t-call="web.external_layout">
