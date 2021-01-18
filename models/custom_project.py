@@ -329,7 +329,7 @@ class CustomOutsourcing(models.Model):
         if(befory_edit_stage != after_edit_stage):
             all_emails_moved = self.pool.get("outsourcing.outsourcing").custom_move_stage_notify(self,self)
             self.when_moved_project_emails = all_emails_moved
-            template_id = self.env.ref('custom_outsourcing.custom_update_project_email_tempalte').id
+            template_id = self.env.ref('custom_outsourcing.custom_update_outsourcing_email_tempalte').id
             self.env['mail.template'].browse(template_id).send_mail(self.id,force_send=True)        
         return rtn
     def unlink(self):
@@ -440,7 +440,7 @@ class CustomOutsourcing(models.Model):
                             project.users_esc_email = all_user_emails
                             print('all_project_user_emails')
                             print(all_user_emails)
-                            # template_id = self.env.ref('custom_project.project_email_tempalte').id
+                            # template_id = self.env.ref('custom_outsourcing.outsourcing_email_tempalte').id
                             # self.env['mail.template'].browse(template_id).send_mail(project.id,force_send=True)
                             project.project_esc_send_email = True  
             else:

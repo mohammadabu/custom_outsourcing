@@ -2,12 +2,12 @@
 <odoo>
   <data>
 
-        <record id="project_email_tempalte" model="mail.template">
-          <field name="name">Project Escalation : Send By Email</field>
-          <field name="model_id" ref="model_project_project" />
+        <record id="outsourcing_email_tempalte" model="mail.template">
+          <field name="name">Outsourcing Escalation : Send By Email</field>
+          <field name="model_id" ref="model_outsourcing_outsourcing" />
           <field name="email_from">odoo@odoo.com</field>
           <field name="email_to">${object.users_esc_email}</field>
-          <field name="subject">Project Escalation</field>
+          <field name="subject">Outsourcing Escalation</field>
           <field name="body_html" type="html">
               <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
               <tr>
@@ -18,7 +18,7 @@
                           <td align="center" style="min-width: 590px;">
                               <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                   <tr><td valign="middle">
-                                      <span style="font-size: 10px;">Your Project</span><br/>
+                                      <span style="font-size: 10px;">Your Outsourcing</span><br/>
                                       <span style="font-size: 20px; font-weight: bold;">
                                           ${object.name}
                                       </span>
@@ -38,12 +38,12 @@
                                   <td valign="top" style="font-size: 13px;">
                                     <p style="margin: 0px;font-size: 14px;">
                                         Dears all,<br/><br/>
-                                        The Project <strong>${object.name}</strong> in stage <strong>${object.project_stage.name}</strong> should be escalated.<br/> 
+                                        The Outsourcing <strong>${object.name}</strong> in stage <strong>${object.project_stage.name}</strong> should be escalated.<br/> 
                                         the days was exceeded allowed to stay in the same stage.
                                     </p>
                                     <p style="margin-top: 24px; margin-bottom: 16px;">
-                                        <a href="/mail/view?model=project.project&amp;res_id=${object.id}" style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
-                                            View Project
+                                        <a href="/mail/view?model=outsourcing.outsourcing&amp;res_id=${object.id}" style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                            View Outsourcing
                                         </a>
                                     </p>
                                     Thanks,<br/>    
@@ -95,12 +95,12 @@
             </table>
           </field>
         </record>
-        <record id="custom_update_project_email_tempalte" model="mail.template">
-          <field name="name">Update Project : Send By Email</field>
-          <field name="model_id" ref="model_project_project" />
+        <record id="custom_update_outsourcing_email_tempalte" model="mail.template">
+          <field name="name">Update Outsourcing : Send By Email</field>
+          <field name="model_id" ref="model_outsourcing_outsourcing" />
           <field name="email_from">odoo@odoo.com</field>
           <field name="email_to">${object.when_moved_project_emails}</field>
-          <field name="subject">Update Project</field>
+          <field name="subject">Update Outsourcing</field>
           <field name="body_html" type="html">
             <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
               <tr>
@@ -111,7 +111,7 @@
                           <td align="center" style="min-width: 590px;">
                               <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                                   <tr><td valign="middle">
-                                      <span style="font-size: 10px;">Your Project</span><br/>
+                                      <span style="font-size: 10px;">Your Outsourcing</span><br/>
                                       <span style="font-size: 20px; font-weight: bold;">
                                           ${object.name}
                                       </span>
@@ -131,11 +131,11 @@
                                   <td valign="top" style="font-size: 13px;">
                                     <p style="margin: 0px;font-size: 14px;">
                                         Dears all,<br/><br/>
-                                        The Project <strong>${object.name}</strong> has been moved to the stage <strong>${object.project_stage.name}</strong> .<br/>                          
+                                        The Outsourcing <strong>${object.name}</strong> has been moved to the stage <strong>${object.project_stage.name}</strong> .<br/>                          
                                     </p>
                                     <p style="margin-top: 24px; margin-bottom: 16px;">
-                                        <a href="/mail/view?model=project.project&amp;res_id=${object.id}" style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
-                                            View Project
+                                        <a href="/mail/view?model=outsourcing.outsourcing&amp;res_id=${object.id}" style="background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;">
+                                            View Outsourcing
                                         </a>
                                     </p>
                                     Thanks,<br/>    

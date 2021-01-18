@@ -11,7 +11,7 @@
         # 'data/cron.xml',
         # 'data/delete_rules.xml',
         'data/data_projects_stages.xml',
-        # 'data/mail_template.xml',
+        'data/mail_template.xml',
         'views/custom_main_project.xml',
         'views/custom_risk_project.xml',
         'views/custom_issue_register.xml',
