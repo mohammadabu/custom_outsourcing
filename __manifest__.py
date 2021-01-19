@@ -1,9 +1,10 @@
+
 # -*- coding: utf-8 -*-
 {
     'name': "Custom Outsourcing",
     'author': "Mohammad abusubhia",
     'version': '1.1',
-    'depends': ['base','crm','outsourcing'],
+    'depends': ['base','crm','outsourcing','hr_timesheet'],
     'data': [
         'security/ir.model.access.csv',
         # 'security/security.xml',
